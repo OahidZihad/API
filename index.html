@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+<body>
+    <h1>JSON</h1>
+    <h2>JavaScript Object Notation</h2>
+    <ul id="users-container">
+        <B style="font-size: 20px; color: tomato;">User Names:</B>
+    </ul>
+    <script>
+        // const user = {
+        //     id: 111, 
+        //     name: 'Zihad', 
+        //     lover: {
+        //         name: 'Jamila',
+        //         age: 20
+        //     },
+        //     friendsAge:[12, 15, 20],
+        //     friends:['Kamal', 'Jamal', 'Shoumik']
+        // };
+        // const userJSON = JSON.stringify(user);
+        // console.log(userJSON);
+        // const userFromJSON = JSON.parse(userJSON);
+        // console.log(userFromJSON);
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(json => displayUser(json))
+
+        function displayUser(users){
+            // console.log("Users",users);
+            const userNames = users.map(user => user.name);
+            // console.log(userNames);
+            const ul = document.getElementById("users-container");
+            for (let i = 0; i < userNames.length; i++) {
+                const user = userNames[i];
+                const li = document.createElement("li");
+                li.innerText = user;
+                ul.appendChild(li);
+            }
+        }
+
+    </script>
+</body>
+</html>
